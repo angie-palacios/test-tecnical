@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type population:</strong>
+  <%= @population.type_population %>
+</p>
+
+<p>
+  <strong>Age init:</strong>
+  <%= @population.age_init %>
+</p>
+
+<p>
+  <strong>Age end:</strong>
+  <%= @population.age_end %>
+</p>
+
+<%= link_to 'Edit', edit_population_path(@population) %> |
+<%= link_to 'Back', populations_path %>

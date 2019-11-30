@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+    <h1>Bienvenido <%= current_user.name %></h1>
+    <%= link_to 'Tabla de actividades', activities_path %>
+    </br>
+    <%= link_to 'Tabla de ploblacion', populations_path %>
+<% else %>
+    <p>No se ha iniciado session</p>
+<% end %>

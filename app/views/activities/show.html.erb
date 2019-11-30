@@ -1,0 +1,33 @@
+<% if user_signed_in? %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @activity.date %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @activity.name %>
+</p>
+
+<p>
+  <strong>Descrption:</strong>
+  <%= @activity.descrption %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @activity.place %>
+</p>
+
+<p>
+  <strong>Type population:</strong>
+  <%= @activity.type_population %>
+</p>
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>
+<% else %>
+    <p>No se ha iniciado session</p>
+<% end %>
