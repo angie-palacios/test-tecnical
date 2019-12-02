@@ -1,5 +1,6 @@
 class PopulationsController < ApplicationController
   before_action :set_population, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /populations
   def index
