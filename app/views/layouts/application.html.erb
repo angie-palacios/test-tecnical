@@ -15,15 +15,15 @@
       <li class="nav-item">
         <%= link_to 'Salir', destroy_user_session_path, method: :delete, class:'text-white' %>
       </li>
+      <% else %>
+      <li class="nav-item btn btn-light">
+      <%= link_to 'Iniciar', new_user_session_path, class:'text-dark' %>
+      </li>
       &nbsp
       <li class="nav-item btn btn-light">
         <%= link_to 'Registrarme', new_user_registration_path, class:'text-dark' %>
       </li>
-    <% else %>
-      <li class="nav-item btn btn-light">
-        <%= link_to 'Iniciar', new_user_session_path, class:'text-dark' %>
-      </li>
-    <% end %>
+      <% end %>
     </ul>
   </div>
   <%= yield %>

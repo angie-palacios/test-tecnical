@@ -1,8 +1,22 @@
 <% if user_signed_in? %>
-    <h1>Bienvenido <%= current_user.name %></h1>
-    <%= link_to 'Tabla de actividades', activities_path %>
-    </br>
-    <%= link_to 'Tabla de ploblacion', populations_path %>
+<h1>Bienvenido <%= current_user.name %></h1>
+<%= now = DateTime.now
+age = now.year - current_user.date_birth.year
+age = -1 if(now.yday < current_user.date_birth.yday) %>
+edad <%= age %> 
+<% if current_user.rol == "Administrador" %>
+<%= link_to 'Tabla de actividades', activities_path %>
+</br>
+<%= link_to 'Tabla de ploblacion', populations_path %>
+</br>
+<%= link_to 'Tabla de ploblacion', users_path %>
+</br>
+<p id="Administradortxt">You are an Administrador!</p>
 <% else %>
+<p id="Administradortxt">You are an Usuario!</p>
+<%= link_to 'Tabla de actividades', activities_path %>
+
+<% end %>
+    <% else %>
     <p>No se ha iniciado session</p>
 <% end %>
