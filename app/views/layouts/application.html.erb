@@ -13,7 +13,15 @@
     <ul class="nav justify-content-end">
     <%- if user_signed_in? %>   
       <li class="nav-item">
-        <%= link_to 'Salir', destroy_user_session_path, method: :delete, class:'text-white' %>
+      <h4><%= current_user.rol %></h4>
+      </li>
+      <h4> &nbsp | &nbsp </h4>
+      <li class="nav-item">
+      <h4><%= current_user.name + ' ' + current_user.last_name %></h4>
+      </li>
+      <h4> &nbsp | &nbsp </h4>
+      <li class="nav-item">
+        <h4><%= link_to 'Salir', destroy_user_session_path, method: :delete, class:'text-white' %></h4>
       </li>
       <% else %>
       <li class="nav-item btn btn-light">
