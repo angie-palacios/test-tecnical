@@ -1,31 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="row justify-content-center m-0 text-center">
+  <div class="col-8 text-dark rounded p-4">
+    <%= link_to 'Tabla de actividades', activities_path %>
+    ||
+    <%= link_to 'Tabla de usuarios', users_path %>
+    ||
+    <%= link_to 'New Population', new_population_path %>
+    <h1>Populations</h1>
 
-<h1>Populations</h1>
+    <div class="row justify-content-center">
+      <table class="table-border-less table-striped ">
+        <thead class="bg-dark text-white rounded">
+          </tr>
+            <th class="p-3">Type population</th>
+            <th class="p-3">Age init</th>
+            <th class="p-3">Age end</th>
+            <th class="p-3" colspan="3">Options</th>
+          </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Type population</th>
-      <th>Age init</th>
-      <th>Age end</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @populations.each do |population| %>
-      <tr>
-        <td><%= population.type_population %></td>
-        <td><%= population.age_init %></td>
-        <td><%= population.age_end %></td>
-        <td><%= link_to 'Show', population %></td>
-        <td><%= link_to 'Edit', edit_population_path(population) %></td>
-        <td><%= link_to 'Destroy', population, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Population', new_population_path %>
+        <tbody>
+          <% @populations.each do |population| %>
+            <tr>
+              <td class="p-2"><%= population.type_population %></td>
+              <td class="p-2"><%= population.age_init %></td>
+              <td class="p-2"><%= population.age_end %></td>
+              <td class="p-2"><%= link_to 'Show', population %></td>
+              <td class="p-2"><%= link_to 'Edit', edit_population_path(population) %></td>
+              <td class="p-2"><%= link_to 'Destroy', population, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
