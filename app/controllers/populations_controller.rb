@@ -5,6 +5,14 @@ class PopulationsController < ApplicationController
   # GET /populations
   def index
     @populations = Population.all
+    respond_to do | format |
+      format.html
+      format.json {
+        if params.has_key?(:type) && params[:type] == "select2"
+          render json: Population.select2(params[:q])
+        end
+      }
+    end
   end
 
   # GET /populations/1
