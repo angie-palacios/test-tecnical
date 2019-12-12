@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class ProfilesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to profiles_path(@user), notice: 'User was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
    # PATCH/PUT /users/1
    def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to profiles_path(@user), notice: 'User was successfully updated.'
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def user_parems
+    def user_params
       params.require(:user).permit(:name, :last_name, :date_birth, :rol, :email, :password, :password_confirmation)
     end
 
