@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :populations
+  resources :profiles
   resources :activities
   get 'home/index'
 
