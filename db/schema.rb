@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191213001125) do
+ActiveRecord::Schema.define(version: 20191213233015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,25 @@ ActiveRecord::Schema.define(version: 20191213001125) do
     t.string "name"
     t.string "description"
     t.bigint "rols_id"
-    t.string "apply"
+    t.boolean "apply"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rols_id"], name: "index_permissions_on_rols_id"
+  end
+
+  create_table "permissions_rols", id: false, force: :cascade do |t|
+    t.bigint "permission_id"
+    t.bigint "rol_id", null: false
+    t.bigint "rols_id"
+    t.index ["permission_id"], name: "index_permissions_rols_on_permission_id"
+    t.index ["rols_id"], name: "index_permissions_rols_on_rols_id"
+  end
+
+  create_table "permissions_users", id: false, force: :cascade do |t|
+    t.bigint "permission_id"
+    t.bigint "user_id"
+    t.index ["permission_id"], name: "index_permissions_users_on_permission_id"
+    t.index ["user_id"], name: "index_permissions_users_on_user_id"
   end
 
   create_table "populations", force: :cascade do |t|
@@ -74,6 +89,10 @@ ActiveRecord::Schema.define(version: 20191213001125) do
 
   add_foreign_key "activities", "populations", column: "populations_id"
   add_foreign_key "permissions", "rols", column: "rols_id"
+  add_foreign_key "permissions_rols", "permissions"
+  add_foreign_key "permissions_rols", "rols", column: "rols_id"
+  add_foreign_key "permissions_users", "permissions"
+  add_foreign_key "permissions_users", "users"
   add_foreign_key "users", "activities", column: "activities_id"
   add_foreign_key "users", "rols"
 end
