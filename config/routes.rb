@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :permissions
+  resources :rols
   resources :populations
   resources :profiles
   resources :activities

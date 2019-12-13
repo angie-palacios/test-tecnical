@@ -1,16 +1,10 @@
-<% if @user.new_record?
-path = profiles_path
-else
-  path = profile_path
-end
-%>
-<%= form_for @user, :url => path do |form| %>
-  <% if user.errors.any? %>
+<%= form_with(model: permission, local: true) do |form| %>
+  <% if permission.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(permission.errors.count, "error") %> prohibited this permission from being saved:</h2>
 
       <ul>
-      <% user.errors.full_messages.each do |message| %>
+      <% permission.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -18,47 +12,45 @@ end
   <% end %>
 
   <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :permission_code %>
   </div>
 
   <div class="field">
-    <%= form.label :last_name %><br />
-    <%= form.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :permission_name %>
   </div>
 
   <div class="field">
-    <%= form.label :date_birth %><br />
-    <%= form.date_field :date_birth %>
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :permission_description %>
   </div>
 
   <div class="form-group">
-    <%= form.label :rol, class: 'contro-label' %>
+    <%= form.label :rols_id, class: 'contro-label' %>
     <div class="col-md-7">
       <div class="input-group">
         <span class="input-group-addon">
           <span class="glyphicon glyphicon-plane"></span>
         </span>
-        <select name="user[rol_id]" id="user_rol"></select>
+        <select name="permission[rols_id]" id="permission_rols_id"></select>
       </div>
     </div>
   </div>
 
   <div class="field">
-    <%= form.label :email %><br />
-    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form.label :apply %>
+    <%= form.text_field :apply, id: :permission_apply %>
   </div>
 
-
   <div class="actions">
-    <%= form.submit "Sign up" %>
+    <%= form.submit %>
   </div>
 <% end %>
 
-
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#user_rol").select2({
+        $("#permission_rols_id").select2({
             width: "330px",
             minimumInputlength: 1,
             debug: true,

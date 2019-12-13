@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191129212547) do
+ActiveRecord::Schema.define(version: 20191213001125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20191129212547) do
     t.index ["populations_id"], name: "index_activities_on_populations_id"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "description"
+    t.bigint "rols_id"
+    t.string "apply"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rols_id"], name: "index_permissions_on_rols_id"
+  end
+
   create_table "populations", force: :cascade do |t|
     t.string "type_population"
     t.integer "age_init"
@@ -34,11 +45,18 @@ ActiveRecord::Schema.define(version: 20191129212547) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rols", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "last_name", null: false
     t.date "date_birth", null: false
-    t.string "rol", null: false
     t.string "email", null: false
     t.string "encrypted_password", null: false
     t.bigint "activities_id"
@@ -47,11 +65,15 @@ ActiveRecord::Schema.define(version: 20191129212547) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "rol_id"
     t.index ["activities_id"], name: "index_users_on_activities_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["rol_id"], name: "index_users_on_rol_id"
   end
 
   add_foreign_key "activities", "populations", column: "populations_id"
+  add_foreign_key "permissions", "rols", column: "rols_id"
   add_foreign_key "users", "activities", column: "activities_id"
+  add_foreign_key "users", "rols"
 end
