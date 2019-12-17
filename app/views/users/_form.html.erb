@@ -1,7 +1,7 @@
 <% if @user.new_record?
-path = users_path
+path = profiles_path
 else
-  path = user_path
+  path = profile_path
 end
 %>
 <%= form_for @user, :url => path do |form| %>
@@ -32,9 +32,16 @@ end
     <%= form.date_field :date_birth %>
   </div>
 
-  <div class="field">
-    <%= form.label :rol %><br />
-    <%= form.text_field :rol, autofocus: true, autocomplete: "rol" %>
+  <div class="form-group">
+    <%= form.label :rol, class: 'contro-label' %>
+    <div class="col-md-7">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-plane"></span>
+        </span>
+        <select name="user[rol_id]" id="user_rol"></select>
+      </div>
+    </div>
   </div>
 
   <div class="field">
@@ -42,9 +49,44 @@ end
     <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  
 
   <div class="actions">
     <%= form.submit "Sign up" %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#user_rol").select2({
+            width: "330px",
+            minimumInputlength: 1,
+            debug: true,
+            ajax: {
+                url: "<%= rols_path(format: :json) %>",
+                dataType: 'json',
+                delay: 250,
+                data: function (params){ 
+                    return {
+                        type: "select2",
+                        q: params.term
+                    };
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: $.map(data, function (rol) {
+                            return {
+                                text:`${rol.name}`,
+                                id: rol.id
+                            }
+                        })
+                    }
+                },
+                cache:true
+            },
+            escapeMarkup: function (markup) { return markup; },
+            theme: "bootstrap",
+            placeholder: "Escriba un caracter"
+        });
+    });
+    </script>

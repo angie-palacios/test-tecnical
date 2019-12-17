@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def can?(code)
-    # permissions.where(:code => code, :apply => true).exists? || rol.
+    self.permissions.where(:code => code, :apply => true).exists? || self.rol.can?(code)
   end
 end
