@@ -53,6 +53,6 @@ class PermissionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def permission_params
-      params.require(:permission).permit(:code, :name, :description, :id_rol, :apply)
+      params.require(:permission).permit(:code, :name, :description, :apply)
     end
 end

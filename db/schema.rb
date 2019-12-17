@@ -30,11 +30,9 @@ ActiveRecord::Schema.define(version: 20191213233015) do
     t.string "code"
     t.string "name"
     t.string "description"
-    t.bigint "rols_id"
     t.boolean "apply"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rols_id"], name: "index_permissions_on_rols_id"
   end
 
   create_table "permissions_rols", id: false, force: :cascade do |t|
@@ -88,7 +86,6 @@ ActiveRecord::Schema.define(version: 20191213233015) do
   end
 
   add_foreign_key "activities", "populations", column: "populations_id"
-  add_foreign_key "permissions", "rols", column: "rols_id"
   add_foreign_key "permissions_rols", "permissions"
   add_foreign_key "permissions_rols", "rols", column: "rols_id"
   add_foreign_key "permissions_users", "permissions"
