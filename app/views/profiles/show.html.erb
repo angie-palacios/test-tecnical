@@ -1,2 +1,40 @@
-<h1>Profile#show</h1>
-<p>Find me in app/views/profile/show.html.erb</p>
+<div class="row justify-content-center m-0">
+  <div class="col-4 bg-dark text-white rounded p-4">
+
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
+
+    <p>
+      <strong>Email :</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Rol:</strong>
+      <%= @user.rol_id %>
+    </p>
+
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Back', users_path %>
+    </div>
+  </div>
+
+    <table>
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th> Apply</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @permissions.each do |permission| %>
+        <tr>
+            <td><%= permission.name %></td>
+            <td><%= check_box_tag 'rock', 'rock music' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>

@@ -6,7 +6,9 @@
     ||
     <%= link_to 'Tabla de actividades', activities_path %>
     ||
-    <%= link_to 'New User', new_profile_path %>
+    <% if current_user.can?(TestTecnical::CREATE_USER) %>
+      <%= link_to 'New User', new_profile_path %>
+    <% end %>
     <h1>Users</h1>
       <br>
       <div class="row justify-content-center">
@@ -28,13 +30,14 @@
               <td class="p-2" ><%= user.last_name %></td>
               <td class="p-2" ><%= user.rol_id %></td>
               <td class="p-2" ><%= user.email %></td>
-              <td class="p-2" ><%= link_to 'Show', user %></td>
+              <td class="p-2" ><%= link_to 'Show', profile_path(user) %></td>
               <td class="p-2" ><%= link_to 'Edit', edit_profile_path(user) %></td>
               <td class="p-2" ><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+
     </div>
   </div>
 </div>
