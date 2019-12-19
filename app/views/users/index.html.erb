@@ -5,7 +5,9 @@
     ||
     <%= link_to 'Tabla de actividades', activities_path %>
     ||
-    <%= link_to 'New User', new_user_path %>
+    <% if current_user.can?(TestTecnical::CREATE_USER) %>
+      <%= link_to 'New User', new_user_path %>
+    <% end %>
     <h1>Users</h1>
       <br>
       <div class="row justify-content-center">

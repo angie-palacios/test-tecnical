@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
 
   # GET /users/1
   def show
+    @permissions = Permission.all
   end
 
   # GET /users/new
