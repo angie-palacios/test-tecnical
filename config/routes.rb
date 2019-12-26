@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :permissions
   resources :rols
   resources :populations
-  resources :profiles
+  resources :profiles do
+    member do
+      post 'edit_status_permission'
+    end
+  end
   resources :activities
   get 'home/index'
 
