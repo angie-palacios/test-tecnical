@@ -1,5 +1,8 @@
+<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 <div class="row justify-content-center m-0">
   <div class="col-4 bg-dark text-white rounded p-4">
+
+  <%= hidden_field_tag 'user_id', @user.id %>
 
     <p>
       <strong>Name:</strong>
@@ -32,9 +35,54 @@
     <tbody>
         <% @permissions.each do |permission| %>
         <tr>
-            <td><%= permission.name %></td>
-            <td><%= check_box_tag 'rock', 'rock music' %></td>
+          <td><%= permission.name %></td>
+          <td><%= check_box_tag "permissions[apply][]", permission.code, @user.can?(permission.code), class: 'permissions_apply'%></td>
         </tr>
         <% end %>
     </tbody>
     </table>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      status_permission();
+    });
+    function status_permission(){
+      $.each($(".permissions_apply"), function(index){
+        $(this).click(function(){
+          if($(this).is(":checked")){
+              edit_status_permission({
+                code: $(this).val(),
+                apply: true,
+                user_id: $("#user_id").val()
+              })
+          }
+          else {
+              edit_status_permission({
+              code: $(this).val(),
+              apply: false,
+              user_id: $("#user_id").val()
+              })
+          }
+      });
+    });  
+  }
+  function edit_status_permission(oParams){
+    $.ajax({
+      url:"<%= edit_status_permission_profile_path(format: :json) %>",
+      data: {
+        id: oParams.user_id,
+        code: oParams.code,
+        apply: oParams.apply,
+        authenticity_token: window._token
+      },
+      type: "POST",
+      success: function(request){
+        console.log(request);
+      },
+      error: function(a, b, c){
+        console.log(a);
+        console.log(b);
+        console.log(c);
+      }
+    })
+  }
+    </script>
