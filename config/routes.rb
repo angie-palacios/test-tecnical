@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   resources :permissions
-  resources :rols
+  resources :rols do
+    member do
+      post 'edit_status_permission'
+    end
+  end
   resources :populations
   resources :profiles do
     member do
