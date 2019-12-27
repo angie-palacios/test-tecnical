@@ -1,5 +1,5 @@
 class RolsController < ApplicationController
-  before_action :set_rol, only: [:show, :edit, :update, :destroy]
+  before_action :set_rol, only: [:show, :edit, :update, :destroy, :edit_status_permission]
 
   # GET /rols
   def index
@@ -16,6 +16,7 @@ class RolsController < ApplicationController
 
   # GET /rols/1
   def show
+    @permissions = Permission.all
   end
 
   # GET /rols/new
@@ -53,7 +54,24 @@ class RolsController < ApplicationController
     redirect_to rols_url, notice: 'Rol was successfully destroyed.'
   end
 
-  private
+  def edit_status_permission
+    if params[:apply] && params[:apply] == "true"
+      @rol.permissions << Permission.find_by(:code => params[:code])
+    else
+      permission=@rol.permissions.find_by(:code => params[:code])
+      @rol.permissions.delete(permission)
+    end
+
+    respond_to do | format |
+      format.json {
+        render json: {
+          :message => 'ok'
+        }
+      }
+    end
+  end
+
+  private 
     # Use callbacks to share common setup or constraints between actions.
     def set_rol
       @rol = Rol.find(params[:id])
