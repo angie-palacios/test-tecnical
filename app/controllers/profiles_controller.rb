@@ -50,7 +50,8 @@ class ProfilesController < ApplicationController
     if params[:apply] && params[:apply] == "true"
       @user.permissions << Permission.find_by(:code => params[:code])
     else
-      @user.permissions.where(:code => params[:code]).delete_all
+      permission=@user.permissions.find_by(:code => params[:code])
+      @user.permissions.delete(permission)
     end
 
     respond_to do | format |
