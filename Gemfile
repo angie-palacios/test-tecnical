@@ -70,3 +70,6 @@ gem 'mini_racer', platforms: :ruby
 
 # Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.
 gem "select2-rails"
+
+# 
+gem 'sweetalert2', '~> 7.25', '>= 7.25.6'
