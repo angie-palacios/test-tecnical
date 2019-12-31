@@ -15,3 +15,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require select2-full
+//= require sweetalert2
